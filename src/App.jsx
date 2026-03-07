@@ -16,7 +16,7 @@ const ManagementDashboard = lazy(() => import('./pages/dashboard/Dashboard'));
 const EvaluationDashboard = lazy(() => import('./pages/dashboard/evaluation/EvaluationDashboard'));
 const IdentityDashboard = lazy(() => import('./pages/dashboard/IdentityHub/IdentityDashboard'));
 
-//Sales
+// Sales
 const SalesLeads = lazy(() => import('./pages/Sales/Leads'));
 const SalesOpportunities = lazy(() => import('./pages/Sales/Opportunities'));
 const SalesManageProjects = lazy(() => import('./pages/Sales/ManageProjects'));
@@ -27,11 +27,10 @@ const SalesProjects = lazy(() => import('./pages/Sales/Projects'));
 
 // Finance & Contracts
 
-const SecurityDeposits = lazy(()=> import("./pages/Finance/SecurityDeposits"))
-const Invoices = lazy(()=> import("./pages/Finance/invoice"))
-const RecurringPayouts = lazy(()=> import("./pages/Finance/RecurringPayouts"))
-const RecurringReports = lazy(()=> import("./pages/Finance/RevenueReports"))
-const Center = lazy
+const SecurityDeposits = lazy(() => import("./pages/Finance/SecurityDeposits"))
+const Invoices = lazy(() => import("./pages/Finance/invoice"))
+const RecurringPayouts = lazy(() => import("./pages/Finance/RecurringPayouts"))
+const RecurringReports = lazy(() => import("./pages/Finance/RevenueReports"))
 
 //  MANAGEMENT
 const Projects = lazy(() => import('./pages/adminmanagement/projects/Projects'));
@@ -70,73 +69,73 @@ function App() {
   return (
     <ThemeProvider>
       <ZoomProvider>
-      <AuthProvider>
-        <Suspense fallback={<Loading />}>
-        <Routes>
-          {/* AUTH */}
-          <Route path="/login" element={<Login />} />
-          {/* <Route path="/register" element={<Register />} /> */}
+        <AuthProvider>
+          <Suspense fallback={<Loading />}>
+            <Routes>
+              {/* AUTH */}
+              <Route path="/login" element={<Login />} />
+              {/* <Route path="/register" element={<Register />} /> */}
 
-          {/* PROTECTED ROUTES */}
-          <Route element={<ProtectedRoute />}>
-            <Route path="/" element={<MainLayout />}>
-              {/* DEFAULT REDIRECT */}
-              <Route index element={<Navigate to="/dashboard/overview" replace />} />
+              {/* PROTECTED ROUTES */}
+              <Route element={<ProtectedRoute />}>
+                <Route path="/" element={<MainLayout />}>
+                  {/* DEFAULT REDIRECT */}
+                  <Route index element={<Navigate to="/dashboard/overview" replace />} />
 
-              {/* DASHBOARDS */}
-              <Route path="dashboard/overview" element={<UnifiedDashboard />} />
-              <Route path="dashboard/management" element={<ManagementDashboard />} />
-              <Route path="dashboard/evaluation" element={<EvaluationDashboard />} />
-              <Route path="dashboard/identity" element={<UserManagement />} />
+                  {/* DASHBOARDS */}
+                  <Route path="dashboard/overview" element={<UnifiedDashboard />} />
+                  <Route path="dashboard/management" element={<ManagementDashboard />} />
+                  <Route path="dashboard/evaluation" element={<EvaluationDashboard />} />
+                  <Route path="dashboard/identity" element={<UserManagement />} />
 
-              {/* Sales */}
-                <Route path="sales/leads" element={<SalesLeads />} />
-              <Route path="sales/opportunities" element={<SalesOpportunities />} />
-              <Route path="sales/projects" element={<SalesManageProjects />} />
-              <Route path="sales/pipeline" element={<SalesDealPipeline />} />
-              <Route path="sales/closed" element={<SalesCloseDeal />} />
-              <Route path="sales/projects" element={<SalesProjects />} />
+                  {/* Sales */}
+                  <Route path="sales/leads" element={<SalesLeads />} />
+                  <Route path="sales/opportunities" element={<SalesOpportunities />} />
+                  <Route path="sales/projects" element={<SalesManageProjects />} />
+                  <Route path="sales/pipeline" element={<SalesDealPipeline />} />
+                  <Route path="sales/closed" element={<SalesCloseDeal />} />
+                  {/* Removed duplicate sales/projects route */}
 
                   {/* Finance & Contracts */}
 
 
-              <Route path="finance/centers" element={<ManageContracts />} />
-              <Route path="finance/invoices" element={<Invoices />} />
-              <Route path="finance/payouts" element={<RecurringPayouts />} />
-              <Route path="finance/reports" element={<RecurringReports />} />
-              <Route path="finance/deposits" element={<SecurityDeposits />} />
+                  <Route path="finance/centers" element={<ManageContracts />} />
+                  <Route path="finance/invoices" element={<Invoices />} />
+                  <Route path="finance/payouts" element={<RecurringPayouts />} />
+                  <Route path="finance/reports" element={<RecurringReports />} />
+                  <Route path="finance/deposits" element={<SecurityDeposits />} />
 
 
-              {/* MANAGEMENT */}
-              <Route path="management/blogs" element={<Blogs />} />
-              <Route path="management/clients" element={<ClientsData />} />
-              <Route path="management/projects" element={<Projects />} />
-              <Route path="management/all-projects" element={<AllProjects />} />
-              <Route path="management/archived" element={<ArchivedProjects />} />
-              <Route path="management/queries" element={<ClientQueries />} />
-              <Route path="management/callback" element={<ClientCallbackData />} />
-              <Route path="management/tables" element={<Tables />} />
-              <Route path="management/billing/generate" element={<BillGenerate />} />
-              <Route path="management/billing/history" element={<InvoiceHistory />} />
+                  {/* MANAGEMENT */}
+                  <Route path="management/blogs" element={<Blogs />} />
+                  <Route path="management/clients" element={<ClientsData />} />
+                  <Route path="management/projects" element={<Projects />} />
+                  <Route path="management/all-projects" element={<AllProjects />} />
+                  <Route path="management/archived" element={<ArchivedProjects />} />
+                  <Route path="management/queries" element={<ClientQueries />} />
+                  <Route path="management/callback" element={<ClientCallbackData />} />
+                  <Route path="management/tables" element={<Tables />} />
+                  <Route path="management/billing/generate" element={<BillGenerate />} />
+                  <Route path="management/billing/history" element={<InvoiceHistory />} />
 
-              {/* EVALUATION */}
-              <Route path="evaluation/agent" element={<AgentEvaluation />} />
-              <Route path="evaluation/tl" element={<TLEvaluation />} />
-              <Route path="evaluation/qa" element={<QAEvaluation />} />
-              <Route path="evaluation/center" element={<CenterEvaluation />} />
-              <Route path="evaluation/admin" element={<ManageAdmin />} />
-              <Route path="evaluation/charts" element={<Charts />} />
+                  {/* EVALUATION */}
+                  <Route path="evaluation/agent" element={<AgentEvaluation />} />
+                  <Route path="evaluation/tl" element={<TLEvaluation />} />
+                  <Route path="evaluation/qa" element={<QAEvaluation />} />
+                  <Route path="evaluation/center" element={<CenterEvaluation />} />
+                  <Route path="evaluation/admin" element={<ManageAdmin />} />
+                  <Route path="evaluation/charts" element={<Charts />} />
 
-              {/* IDENTITY */}
-              <Route path="identity" element={<UserManagement />} />
+                  {/* IDENTITY */}
+                  <Route path="identity" element={<UserManagement />} />
 
-              {/* FALLBACK */}
-              <Route path="*" element={<Navigate to="/dashboard/management" replace />} />
-            </Route>
-          </Route>
-        </Routes>
-        </Suspense>
-      </AuthProvider>
+                  {/* FALLBACK */}
+                  <Route path="*" element={<Navigate to="/dashboard/management" replace />} />
+                </Route>
+              </Route>
+            </Routes>
+          </Suspense>
+        </AuthProvider>
       </ZoomProvider>
     </ThemeProvider>
   );
