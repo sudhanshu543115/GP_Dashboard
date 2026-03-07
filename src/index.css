@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================
+   BASE THEME TOKENS
+========================= */
+@layer base {
+  :root {
+    /* LIGHT MODE (default) */
+
+    --background: 244 247 251;
+    --foreground: 15 23 42;
+
+    --card: 255 255 255;
+    --card-foreground: 15 23 42;
+
+    --primary: 26 109 217;
+    --primary-foreground: 255 255 255;
+
+    --border: 203 213 225;
+
+    --sticky-bg: 255 255 255;
+    --sticky-border: 203 213 225;
+  }
+
+  .dark {
+    /* DARK MODE */
+
+    --background: 15 17 22;
+    --foreground: 255 255 255;
+
+    --card: 30 37 48;
+    --card-foreground: 255 255 255;
+
+    --primary: 59 130 246;
+    --primary-foreground: 255 255 255;
+
+    --border: 63 75 91;
+
+    --sticky-bg: 21 25 33;
+    --sticky-border: 63 75 91;
+  }
+
+  body {
+    @apply font-sans antialiased overflow-x-hidden;
+    background-color: rgb(var(--background));
+    color: rgb(var(--foreground));
+  }
+}
+
+/* =========================
+   SCROLLBAR (Adaptive)
+========================= */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--border));
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--primary));
+}
+
+/* =========================
+   COMPONENT UTILITIES
+========================= */
+@layer components {
+
+  /* Glass Panel (FIXED) */
+  .glass-panel {
+    @apply bg-card/60 backdrop-blur-xl border border-border shadow-xl rounded-xl;
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400;
+  }
+
+  /* Table Sticky Column */
+  .overflow-x-auto {
+    overflow-x: auto;
+    overflow-y: visible;
+  }
+
+  .overflow-x-auto table {
+    min-width: max-content;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  .overflow-x-auto table th:first-child,
+  .overflow-x-auto table td:first-child,
+  .overflow-x-auto table th.sticky-col,
+  .overflow-x-auto table td.sticky-col {
+    position: sticky;
+    left: 0;
+    z-index: 20;
+    background-color: rgb(var(--sticky-bg));
+    box-shadow: 1px 0 0 0 rgb(var(--sticky-border));
+    background-clip: padding-box;
+  }
+
+  .overflow-x-auto table thead th:first-child,
+  .overflow-x-auto table thead th.sticky-col {
+    z-index: 30;
+  }
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dropdown {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.animate-dropdown {
+  animation: dropdown 0.2s ease-out forwards;
+}
